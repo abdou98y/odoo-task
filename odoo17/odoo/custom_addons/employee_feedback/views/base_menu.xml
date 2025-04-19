@@ -1,0 +1,11 @@
+<odoo>
+    <menuitem 
+    id="employee_feedback_menu" 
+    name="Employee Feedback" 
+    />
+    <menuitem
+    id="employee_feedback_submenu"
+    name="Feedback Form"
+    parent="employee_feedback_menu"
+    />
+</odoo>

@@ -1,0 +1,68 @@
+<odoo>
+    <record id="feedback_tree_view" model="ir.ui.view">
+        <field name="name">feedback tree</field>
+        <field name="model">feedback</field>
+        <field name="arch" type="xml">
+            <tree string="Feedbacks" >
+                <field name="employee_id" />
+                <field name="feedback"/>
+                <field name="date_submitted"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="feedback_form_view" model="ir.ui.view">
+        <field name="name">feedback form</field>
+        <field name="model">feedback</field>
+        <field name="arch" type="xml">
+            <form string="Feedback Form">
+                <sheet>
+                    <header>
+                        <field name="status" widget="statusbar" options="{'clickable':1}"/>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="employee_id" readonly="1"/>
+                            <field name="feedback" readonly="status != 'pending'" />
+                            <field name="date_submitted" readonly="1"/> 
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="feedback_search_view" model="ir.ui.view">
+        <field name="name">feedback search</field>
+        <field name="model">feedback</field>
+        <field name="arch" type="xml">
+            <search string="Feedback Search">
+                <field name="employee_id"/>
+                <field name="feedback"/>
+                <field name="date_submitted"/>
+                <field name="status"/>
+
+                <filter name="status_pending" string="Pending" domain="[('status','=','pending')]"/>
+                <filter name="status_reviewed" string="reviewed" domain="[('status','=','reviewed')]"/>
+                <filter name="status_action_taken" string="action taken" domain="[('status','=','action_taken')]"/>
+            </search>
+        </field>
+    </record>
+    
+
+    <record id="feedback_menu_action" model="ir.actions.act_window">
+        <field name="name">Feedbacks</field>
+        <field name="res_model">feedback</field>
+    </record>
+
+
+    <menuitem 
+    id="feedbacks_menu" 
+    name="Feedbacks" 
+    parent="employee_feedback_submenu"
+    action="feedback_menu_action"
+    />
+</odoo>
